@@ -14,3 +14,17 @@ if ('serviceWorker' in navigator && location.protocol === 'https:') {
 // Installed on a home screen, ask the browser not to clear stored data when
 // space runs low.
 if (matchMedia('(display-mode: standalone)').matches) navigator.storage?.persist?.();
+
+// iOS shrinks the visual viewport when the keyboard opens but leaves the page
+// the same size, so a sheet pinned to the bottom would hide behind it.
+// --keyboard lets the stylesheet lift the sheet clear.
+const viewport = window.visualViewport;
+if (viewport) {
+  const trackKeyboard = () => {
+    const covered = Math.max(0, window.innerHeight - viewport.height - viewport.offsetTop);
+    document.documentElement.style.setProperty('--keyboard', `${Math.round(covered)}px`);
+  };
+  viewport.addEventListener('resize', trackKeyboard);
+  viewport.addEventListener('scroll', trackKeyboard);
+  trackKeyboard();
+}

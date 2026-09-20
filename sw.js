@@ -10,6 +10,8 @@ const SHELL = [
   './src/ui/app.js', './src/ui/icons.js', './src/ui/primitives.js', './src/ui/today.js', './src/ui/quick-add.js',
   './src/ui/entry-form.js', './src/ui/foods.js', './src/ui/month-picker.js', './src/ui/history.js', './src/ui/settings.js',
   './icons/icon.svg', './icons/apple-touch-icon.png', './icons/icon-192.png', './icons/icon-512.png',
+  ...['1206x2622', '1179x2556', '1320x2868', '1290x2796', '1284x2778', '1170x2532', '1125x2436']
+    .flatMap((size) => [`./icons/splash-${size}-light.png`, `./icons/splash-${size}-dark.png`]),
 ];
 
 self.addEventListener('install', (event) => {
